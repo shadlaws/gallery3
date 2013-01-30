@@ -486,9 +486,21 @@ class graphics_Core {
 
       case "sharpen":
         return function_exists("imageconvolution");
+      
+      case "interlace":
+        return function_exists("imageinterlace");
+        
+      case "strip":
+        // GD doesn't have an option to strip metadata; it *always* strips metadata
+        // @todo: extend the library to add metadata back in
+        return false;
       }
     }
 
+    if ((module::get_var("gallery", "graphics_toolkit") == "graphicsmagick") && ($func == "strip")) {
+      // strip was introduced in v1.3.15
+      return (version_compare(graphics::detect_toolkits()->graphicsmagick->version, "1.3.15") >= 0);
+    }
     return true;
   }
 

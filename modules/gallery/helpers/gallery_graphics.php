@@ -95,6 +95,8 @@ class gallery_graphics_Core {
           // Mimes not well-defined or not the same - convert input to output
           $image = Image::factory($input_file)
             ->quality(module::get_var("gallery", "image_quality"))
+            ->strip(true)
+            ->interlace(true)
             ->save($output_file);
         }
       } else {

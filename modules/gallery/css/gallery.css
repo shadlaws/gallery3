@@ -42,14 +42,6 @@
   padding: 0em;
 }
 
-#g-add-photos-canvas .uploadifyQueue {
-  margin-top: .5em;
-}
-
-#g-add-photos-canvas .uploadifyQueueItem {
-  margin: 0;
-}
-
 #g-add-photos-button {
   z-index: 1;
 }

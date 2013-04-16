@@ -19,11 +19,11 @@
  */
 class User_Controller_Admin_Users extends Controller_Admin {
   public function action_index() {
-    $view = new View_Admin("required/admin.html");
+    $view = View_Admin::factory("required/admin.html");
     $view->page_title = t("Users and groups");
     $view->page_type = "collection";
     $view->page_subtype = "admin_users";
-    $view->content = new View("admin/users.html");
+    $view->content = View::factory("admin/users.html");
 
     // @todo: add this as a config option
     $page_size = Module::get_var("user", "page_size", 10);
@@ -128,7 +128,7 @@ class User_Controller_Admin_Users extends Controller_Admin {
     if (empty($user)) {
       throw HTTP_Exception::factory(404);
     }
-    $v = new View("admin/users_delete_user.html");
+    $v = View::factory("admin/users_delete_user.html");
     $v->user = $user;
     $v->form = $this->_get_user_delete_form_admin($user);
     print $v;
@@ -202,7 +202,7 @@ class User_Controller_Admin_Users extends Controller_Admin {
   }
 
   public function action_group($group_id) {
-    $view = new View("admin/users_group.html");
+    $view = View::factory("admin/users_group.html");
     $view->group = Group::lookup($group_id);
     print $view;
   }

@@ -27,7 +27,7 @@ class Exif_Hook_ExifTheme {
         ->execute()
         ->current();
       if ($record && $record->key_count) {
-        $view = new View("exif/sidebar.html");
+        $view = View::factory("exif/sidebar.html");
         $view->item = $item;
         return $view;
       }

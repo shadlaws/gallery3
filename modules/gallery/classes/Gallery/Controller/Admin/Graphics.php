@@ -19,9 +19,9 @@
  */
 class Gallery_Controller_Admin_Graphics extends Controller_Admin {
   public function action_index() {
-    $view = new View_Admin("required/admin.html");
+    $view = View_Admin::factory("required/admin.html");
     $view->page_title = t("Graphics settings");
-    $view->content = new View("admin/graphics.html");
+    $view->content = View::factory("admin/graphics.html");
     $view->content->tk = Graphics::detect_toolkits();
     $view->content->active = Module::get_var("gallery", "graphics_toolkit", "none");
     print $view;

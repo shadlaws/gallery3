@@ -22,7 +22,7 @@ class Gallery_Controller_Login extends Controller {
   public $allow_private_gallery = true;
 
   public function action_ajax() {
-    $view = new View("gallery/login_ajax.html");
+    $view = View::factory("gallery/login_ajax.html");
     $view->form = Auth::get_login_form("login/auth_ajax");
     print $view;
   }
@@ -34,16 +34,16 @@ class Gallery_Controller_Login extends Controller {
     if ($valid) {
       JSON::reply(array("result" => "success"));
     } else {
-      $view = new View("gallery/login_ajax.html");
+      $view = View::factory("gallery/login_ajax.html");
       $view->form = $form;
       JSON::reply(array("result" => "error", "html" => (string)$view));
     }
   }
 
   public function action_html() {
-    $view = new View_Theme("required/page.html", "other", "login");
+    $view = View_Theme::factory("required/page.html", "other", "login");
     $view->page_title = t("Log in to Gallery");
-    $view->content = new View("gallery/login_ajax.html");
+    $view->content = View::factory("gallery/login_ajax.html");
     $view->content->form = Auth::get_login_form("login/auth_html");
     print $view;
   }
@@ -56,9 +56,9 @@ class Gallery_Controller_Login extends Controller {
       $continue_url = $form->continue_url->value;
       HTTP::redirect($continue_url ? $continue_url : Item::root()->abs_url());
     } else {
-      $view = new View_Theme("required/page.html", "other", "login");
+      $view = View_Theme::factory("required/page.html", "other", "login");
       $view->page_title = t("Log in to Gallery");
-      $view->content = new View("gallery/login_ajax.html");
+      $view->content = View::factory("gallery/login_ajax.html");
       $view->content->form = $form;
       print $view;
     }

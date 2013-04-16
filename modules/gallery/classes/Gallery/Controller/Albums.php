@@ -55,7 +55,7 @@ class Gallery_Controller_Albums extends Controller_Items {
       HTTP::redirect($album->abs_url("page=$max_pages"));
     }
 
-    $template = new View_Theme("required/page.html", "collection", "album");
+    $template = View_Theme::factory("required/page.html", "collection", "album");
     $template->set_global(
       array("page" => $page,
             "page_title" => null,
@@ -66,7 +66,7 @@ class Gallery_Controller_Albums extends Controller_Items {
             "parents" => $album->parents()->as_array(), // view calls empty() on this
             "breadcrumbs" => Breadcrumb::array_from_item_parents($album),
             "children_count" => $children_count));
-    $template->content = new View("required/album.html");
+    $template->content = View::factory("required/album.html");
     $album->increment_view_count();
 
     print $template;

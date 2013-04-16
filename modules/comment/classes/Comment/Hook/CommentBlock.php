@@ -28,7 +28,7 @@ class Comment_Hook_CommentBlock {
     case "recent_comments":
       $block->css_id = "g-recent-comments";
       $block->title = t("Recent comments");
-      $block->content = new View("admin/block_recent_comments.html");
+      $block->content = View::factory("admin/block_recent_comments.html");
       $block->content->comments =
         ORM::factory("Comment")->order_by("created", "DESC")->limit(5)->find_all();
       break;

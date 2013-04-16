@@ -163,7 +163,7 @@ class Gallery_Controller_L10nClient extends Controller {
                                'translation' => $translation);
       }
 
-      $v = new View('gallery/l10n_client.html');
+      $v = View::factory('gallery/l10n_client.html');
       $v->string_list = $string_list;
       $v->l10n_search_form = self::_l10n_client_search_form();
       $v->plural_forms = L10nClient::plural_forms($locale);

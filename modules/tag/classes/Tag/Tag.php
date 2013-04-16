@@ -64,7 +64,7 @@ class Tag_Tag {
   static function cloud($count) {
     $tags = Tag::popular_tags($count)->as_array();
     if ($tags) {
-      $cloud = new View("tag/cloud.html");
+      $cloud = View::factory("tag/cloud.html");
       $cloud->max_count = $tags[0]->count;
       if (!$cloud->max_count) {
         return;

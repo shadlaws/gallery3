@@ -50,9 +50,9 @@ class Recaptcha_Controller_Admin_Recaptcha extends Controller_Admin {
     }
 
     Recaptcha::check_config();
-    $view = new View_Admin("required/admin.html");
+    $view = View_Admin::factory("required/admin.html");
     $view->page_title = t("reCAPTCHA");
-    $view->content = new View("admin/recaptcha.html");
+    $view->content = View::factory("admin/recaptcha.html");
     $view->content->public_key = Module::get_var("recaptcha", "public_key");
     $view->content->private_key = Module::get_var("recaptcha", "private_key");
     $view->content->form = $form;

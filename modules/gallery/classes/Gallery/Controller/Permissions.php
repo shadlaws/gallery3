@@ -27,7 +27,7 @@ class Gallery_Controller_Permissions extends Controller {
       Access::forbidden();
     }
 
-    $view = new View("gallery/permissions_browse.html");
+    $view = View::factory("gallery/permissions_browse.html");
     $view->htaccess_works = Access::htaccess_works();
     $view->item = $item;
     $view->parents = $item->parents();
@@ -82,7 +82,7 @@ class Gallery_Controller_Permissions extends Controller {
   }
 
   private function _get_form($item) {
-    $view = new View("gallery/permissions_form.html");
+    $view = View::factory("gallery/permissions_form.html");
     $view->item = $item;
     $view->groups = Identity::groups();
     $view->permissions = ORM::factory("Permission")->find_all();

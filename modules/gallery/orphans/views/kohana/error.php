@@ -28,13 +28,13 @@ if ($e instanceof HTTP_Exception_404) {
   if (Route::$controller == "file_proxy") {
     print "File not found";
   } else {
-    $view = new View_Theme("required/page.html", "other", "error");
+    $view = View_Theme::factory("required/page.html", "other", "error");
     $view->page_title = t("Dang...  Page not found!");
-    $view->content = new View("error/404.html");
+    $view->content = View::factory("error/404.html");
     $user = Identity::active_user();
     $view->content->is_guest = $user && $user->guest;
     if ($view->content->is_guest) {
-      $view->content->login_form = new View("gallery/login_ajax.html");
+      $view->content->login_form = View::factory("gallery/login_ajax.html");
       $view->content->login_form->form = Auth::get_login_form("login/auth_html");
     }
     print $view;

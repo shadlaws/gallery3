@@ -46,7 +46,7 @@ class Rss_Controller_Rss extends Controller {
       HTTP::redirect(URL::query(array("page" => $feed->max_pages)));
     }
 
-    $view = new View(empty($feed->view) ? "rss/feed.mrss" : $feed->view);
+    $view = View::factory(empty($feed->view) ? "rss/feed.mrss" : $feed->view);
     unset($feed->view);
 
     $view->feed = $feed;

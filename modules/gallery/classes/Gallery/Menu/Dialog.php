@@ -22,7 +22,7 @@
  */
 class Gallery_Menu_Dialog extends Menu_Element {
   public function render() {
-    $view = new View(isset($this->view) ? $this->view : "gallery/menu_dialog.html");
+    $view = View::factory(isset($this->view) ? $this->view : "gallery/menu_dialog.html");
     $view->menu = $this;
     return $view;
   }

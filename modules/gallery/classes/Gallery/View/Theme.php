@@ -214,7 +214,7 @@ class Gallery_View_Theme extends View_Gallery {
   public function sidebar_blocks() {
     $sidebar = BlockManager::get_html("site_sidebar", $this);
     if (empty($sidebar) && Identity::active_user()->admin) {
-      $sidebar = new View("required/no_sidebar.html");
+      $sidebar = View::factory("required/no_sidebar.html");
     }
     return $sidebar;
   }

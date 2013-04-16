@@ -576,7 +576,7 @@ class Gallery_Hook_GalleryEvent {
   }
 
   static function show_user_profile($data) {
-    $v = new View("gallery/user_profile_info.html");
+    $v = View::factory("gallery/user_profile_info.html");
 
     $fields = array("name" => t("Name"), "locale" => t("Language Preference"),
                     "email" => t("Email"), "full_name" => t("Full name"), "url" => t("Web site"));

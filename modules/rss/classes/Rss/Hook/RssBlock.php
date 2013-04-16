@@ -38,7 +38,7 @@ class Rss_Hook_RssBlock {
         $block = new Block();
         $block->css_id = "g-rss";
         $block->title = t("Available RSS feeds");
-        $block->content = new View("rss/block.html");
+        $block->content = View::factory("rss/block.html");
         $block->content->feeds = $feeds;
       }
       break;

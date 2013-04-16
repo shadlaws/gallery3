@@ -27,12 +27,12 @@ class Gallery_Controller_Photos extends Controller_Items {
     }
     Access::required("view", $photo);
 
-    $template = new View_Theme("required/page.html", "item", "photo");
+    $template = View_Theme::factory("required/page.html", "item", "photo");
     $template->set_global(array("item" => $photo,
                                 "children" => array(),
                                 "children_count" => 0));
     $template->set_global(Item::get_display_context($photo));
-    $template->content = new View("required/photo.html");
+    $template->content = View::factory("required/photo.html");
 
     $photo->increment_view_count();
 

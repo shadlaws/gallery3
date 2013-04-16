@@ -42,7 +42,7 @@ class Form_Uploadify_Core extends Form_Input {
   }
 
   public function render() {
-    $v = new View("form_uploadify.html");
+    $v = View::factory("form_uploadify.html");
     $v->album = $this->data["album"];
     $v->script_data = $this->data["script_data"];
     $v->simultaneous_upload_limit = Module::get_var("gallery", "simultaneous_upload_limit");

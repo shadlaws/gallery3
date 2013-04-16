@@ -27,8 +27,8 @@ class Comment_Controller_Admin_ManageComments extends Controller_Admin {
       ->where("updated", "<", DB::expr("UNIX_TIMESTAMP() - 86400 * 7"))
       ->execute();
 
-    $view = new View_Admin("required/admin.html");
-    $view->content = new View("admin/manage_comments.html");
+    $view = View_Admin::factory("required/admin.html");
+    $view->content = View::factory("admin/manage_comments.html");
     $view->content->menu = $this->_menu($this->_counts());
     print $view;
   }
@@ -44,7 +44,7 @@ class Comment_Controller_Admin_ManageComments extends Controller_Admin {
   public function action_queue($state) {
     $page = max(Request::current()->query("page"), 1);
 
-    $view = new View_Gallery("admin/manage_comments_queue.html");
+    $view = View_Gallery::factory("admin/manage_comments_queue.html");
     $view->counts = $this->_counts();
     $view->menu = $this->_menu($view->counts);
     $view->state = $state;

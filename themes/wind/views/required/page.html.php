@@ -122,7 +122,7 @@
         </div>
         <div id="g-sidebar" class="yui-b">
           <? if (!in_array($theme->page_subtype, array("login", "error"))): ?>
-          <?= new View("wind/sidebar.html") ?>
+          <?= View::factory("wind/sidebar.html") ?>
           <? endif ?>
         </div>
       </div>

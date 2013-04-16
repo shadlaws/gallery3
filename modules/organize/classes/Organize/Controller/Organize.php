@@ -23,7 +23,7 @@ class Organize_Controller_Organize extends Controller {
     Access::required("view", $album);
     Access::required("edit", $album);
 
-    $v = new View("organize/frame.html");
+    $v = View::factory("organize/frame.html");
     $v->album = $album;
     print $v;
   }
@@ -33,7 +33,7 @@ class Organize_Controller_Organize extends Controller {
     Access::required("view", $album);
     Access::required("edit", $album);
 
-    $v = new View("organize/dialog.html");
+    $v = View::factory("organize/dialog.html");
     $v->album = $album;
     print $v;
   }

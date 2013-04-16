@@ -54,7 +54,7 @@ class Comment_Controller_Comments extends Controller {
 
     if ($valid) {
       $comment->save();
-      $view = new View_Theme("comment/comment.html", "other", "comment-fragment");
+      $view = View_Theme::factory("comment/comment.html", "other", "comment-fragment");
       $view->comment = $comment;
 
       JSON::reply(array("result" => "success",

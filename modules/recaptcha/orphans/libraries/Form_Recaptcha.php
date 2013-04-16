@@ -39,7 +39,7 @@ class Form_Recaptcha_Core extends Form_Input {
                           "http://recaptcha.net/api/getkey</a>");
     }
 
-    $view = new View("recaptcha/form.html");
+    $view = View::factory("recaptcha/form.html");
     $view->public_key = $public_key;
     return $view;
   }

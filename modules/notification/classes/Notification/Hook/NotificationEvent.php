@@ -126,7 +126,7 @@ class Notification_Hook_NotificationEvent {
       return;
     }
 
-    $view = new View("notification/user_profile.html");
+    $view = View::factory("notification/user_profile.html");
     $view->subscriptions = array();
     foreach(ORM::factory("Subscription")
             ->where("user_id", "=", $data->user->id)

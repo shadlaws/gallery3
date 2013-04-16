@@ -45,7 +45,7 @@ class ImageBlock_Hook_ImageBlockBlock {
         $block = new Block();
         $block->css_id = "g-image-block";
         $block->title = t2("Random image", "Random images", $image_count);
-        $block->content = new View("image_block/block.html");
+        $block->content = View::factory("image_block/block.html");
         $block->content->items = $items;
       }
       break;

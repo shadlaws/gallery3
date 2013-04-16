@@ -19,9 +19,9 @@
  */
 class ServerAdd_Controller_Admin_ServerAdd extends Controller_Admin {
   public function action_index() {
-    $view = new View_Admin("required/admin.html");
+    $view = View_Admin::factory("required/admin.html");
     $view->page_title = t("Add from server");
-    $view->content = new View("admin/server_add.html");
+    $view->content = View::factory("admin/server_add.html");
     $view->content->form = $this->_get_admin_form();
     $paths = unserialize(Module::get_var("server_add", "authorized_paths", "a:0:{}"));
     $view->content->paths = array_keys($paths);
@@ -49,8 +49,8 @@ class ServerAdd_Controller_Admin_ServerAdd extends Controller_Admin {
       }
     }
 
-    $view = new View_Admin("required/admin.html");
-    $view->content = new View("admin/server_add.html");
+    $view = View_Admin::factory("required/admin.html");
+    $view->content = View::factory("admin/server_add.html");
     $view->content->form = $form;
     $view->content->paths = array_keys($paths);
     print $view;

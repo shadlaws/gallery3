@@ -56,7 +56,7 @@ class Search_Controller_Search extends Controller {
 
     $max_pages = max(ceil($count / $page_size), 1);
 
-    $template = new View_Theme("required/page.html", "collection", "search");
+    $template = View_Theme::factory("required/page.html", "collection", "search");
     $root = Item::root();
     $template->set_global(
       array("page" => $page,
@@ -68,7 +68,7 @@ class Search_Controller_Search extends Controller {
             ),
             "children_count" => $count));
 
-    $template->content = new View("search/results.html");
+    $template->content = View::factory("search/results.html");
     $template->content->album = $album;
     $template->content->items = $result;
     $template->content->q = $q;

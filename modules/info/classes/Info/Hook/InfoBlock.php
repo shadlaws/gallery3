@@ -31,7 +31,7 @@ class Info_Hook_InfoBlock {
         $block->css_id = "g-metadata";
         $block->title = $theme->item()->is_album() ? t("Album info") :
           ($theme->item()->is_movie() ? t("Movie info") : t("Photo info"));
-        $block->content = new View("info/block.html");
+        $block->content = View::factory("info/block.html");
         if ($theme->item->title && Module::get_var("info", "show_title")) {
           $info["title"] = array(
             "label" => t("Title:"),

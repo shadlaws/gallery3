@@ -43,7 +43,7 @@ class Rest_Controller_Rest extends Controller {
     $form = new Forge("rest/reset_api_key", "", "post", array("id" => "g-reset-api-key"));
     $group = $form->group("confirm_reset")->label(t("Confirm resetting your REST API key"));
     $group->submit("")->value(t("Reset"));
-    $v = new View("rest/reset_api_key_confirm.html");
+    $v = View::factory("rest/reset_api_key_confirm.html");
     $v->form = $form;
     print $v;
   }

@@ -33,7 +33,7 @@ class Gallery_Controller_Reauthenticate extends Controller {
     // On redirects from the admin controller, the ajax request indicator is lost,
     // so we store it in the session.
     if ($is_ajax) {
-      $v = new View("gallery/reauthenticate.html");
+      $v = View::factory("gallery/reauthenticate.html");
       $v->form = self::_form();
       $v->user_name = Identity::active_user()->name;
       print $v;
@@ -62,7 +62,7 @@ class Gallery_Controller_Reauthenticate extends Controller {
       GalleryLog::warning("user", t("Failed re-authentication for %name", array("name" => $name)));
       Module::event("user_auth_failed", $name);
       if (Request::current()->is_ajax()) {
-        $v = new View("gallery/reauthenticate.html");
+        $v = View::factory("gallery/reauthenticate.html");
         $v->form = $form;
         $v->user_name = Identity::active_user()->name;
         JSON::reply(array("html" => (string)$v));
@@ -73,9 +73,9 @@ class Gallery_Controller_Reauthenticate extends Controller {
   }
 
   private static function _show_form($form) {
-    $view = new View_Theme("required/page.html", "other", "reauthenticate");
+    $view = View_Theme::factory("required/page.html", "other", "reauthenticate");
     $view->page_title = t("Re-authenticate");
-    $view->content = new View("gallery/reauthenticate.html");
+    $view->content = View::factory("gallery/reauthenticate.html");
     $view->content->form = $form;
     $view->content->user_name = Identity::active_user()->name;
 

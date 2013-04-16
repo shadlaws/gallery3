@@ -30,9 +30,9 @@ class ServerAdd_Controller_ServerAdd extends Controller_Admin {
       ->execute();
 
     $item = ORM::factory("Item", $id);
-    $view = new View("server_add/tree_dialog.html");
+    $view = View::factory("server_add/tree_dialog.html");
     $view->item = $item;
-    $view->tree = new View("server_add/tree.html");
+    $view->tree = View::factory("server_add/tree.html");
     $view->tree->files = $files;
     $view->tree->parents = array();
     print $view;
@@ -41,7 +41,7 @@ class ServerAdd_Controller_ServerAdd extends Controller_Admin {
   public function action_children() {
     $path = Request::current()->query("path");
 
-    $tree = new View("server_add/tree.html");
+    $tree = View::factory("server_add/tree.html");
     $tree->files = array();
     $tree->parents = array();
 

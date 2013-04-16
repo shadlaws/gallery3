@@ -56,7 +56,7 @@ class User_Controller_Password extends Controller {
     if ($user && !empty($user->email)) {
       $user->hash = Random::hash();
       $user->save();
-      $message = new View("user/reset_password.html");
+      $message = View::factory("user/reset_password.html");
       $message->confirm_url = URL::abs_site("password/do_reset?key=$user->hash");
       $message->user = $user;
 
@@ -100,7 +100,7 @@ class User_Controller_Password extends Controller {
   }
 
   private function _new_password_form($hash=null) {
-    $template = new View_Theme("required/page.html", "other", "reset");
+    $template = View_Theme::factory("required/page.html", "other", "reset");
 
     $form = new Forge("password/do_reset", "", "post", array("id" => "g-change-password-form"));
     $group = $form->group("reset")->label(t("Change Password"));

@@ -20,7 +20,7 @@
 class Search_Hook_SearchTheme {
   static function header_top($theme) {
     if ($theme->page_subtype() != "login") {
-      $view = new View("search/link.html");
+      $view = View::factory("search/link.html");
       return $view->render();
     } else {
       return "";

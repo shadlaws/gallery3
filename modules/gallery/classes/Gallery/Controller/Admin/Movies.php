@@ -46,9 +46,9 @@ class Gallery_Controller_Admin_Movies extends Controller_Admin {
     $ffmpeg_path = Movie::find_ffmpeg();
     $ffmpeg_dir = substr($ffmpeg_path, 0, strrpos($ffmpeg_path, "/"));
 
-    $view = new View_Admin("required/admin.html");
+    $view = View_Admin::factory("required/admin.html");
     $view->page_title = t("Movies settings");
-    $view->content = new View("admin/movies.html");
+    $view->content = View::factory("admin/movies.html");
     $view->content->form = $form;
     $view->content->ffmpeg_dir = $ffmpeg_dir;
     $view->content->ffmpeg_version = $ffmpeg_version;

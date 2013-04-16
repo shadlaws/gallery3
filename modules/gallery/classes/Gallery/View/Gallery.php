@@ -40,7 +40,7 @@ class Gallery_View_Gallery extends View {
    * See themes/wind/views/pager.html for documentation on the variables generated here.
    */
   public function paginator() {
-    $v = new View("required/paginator.html");
+    $v = View::factory("required/paginator.html");
     $v->page_type = $this->page_type;
     $v->page_subtype = $this->page_subtype;
     $v->first_page_url = null;

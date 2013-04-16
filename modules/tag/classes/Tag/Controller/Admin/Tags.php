@@ -21,9 +21,9 @@ class Tag_Controller_Admin_Tags extends Controller_Admin {
   public function action_index() {
     $filter = Request::current()->query("filter");
 
-    $view = new View_Admin("required/admin.html");
+    $view = View_Admin::factory("required/admin.html");
     $view->page_title = t("Manage tags");
-    $view->content = new View("admin/tags.html");
+    $view->content = View::factory("admin/tags.html");
     $view->content->filter = $filter;
 
     $query = ORM::factory("Tag");

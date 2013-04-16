@@ -29,7 +29,7 @@ class Tag_Hook_TagBlock {
       $block = new Block();
       $block->css_id = "g-tag";
       $block->title = t("Popular tags");
-      $block->content = new View("tag/block.html");
+      $block->content = View::factory("tag/block.html");
       $block->content->cloud = Tag::cloud(Module::get_var("tag", "tag_cloud_size", 30));
 
       if ($theme->item() && $theme->page_subtype() != "tag" && Access::can("edit", $theme->item())) {

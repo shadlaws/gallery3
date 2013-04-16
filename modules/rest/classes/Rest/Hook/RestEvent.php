@@ -84,7 +84,7 @@ class Rest_Hook_RestEvent {
       return;
     }
 
-    $view = new View("rest/user_profile.html");
+    $view = View::factory("rest/user_profile.html");
     $key = ORM::factory("UserAccessKey")
       ->where("user_id", "=", $data->user->id)
       ->find();

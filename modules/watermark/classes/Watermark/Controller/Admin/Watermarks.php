@@ -21,9 +21,9 @@ class Watermark_Controller_Admin_Watermarks extends Controller_Admin {
   public function action_index() {
     $name = Module::get_var("watermark", "name");
 
-    $view = new View_Admin("required/admin.html");
+    $view = View_Admin::factory("required/admin.html");
     $view->page_title = t("Watermarks");
-    $view->content = new View("admin/watermarks.html");
+    $view->content = View::factory("admin/watermarks.html");
     if ($name) {
       $view->content->name = Module::get_var("watermark", "name");
       $view->content->url = URL::file("var/modules/watermark/$name");

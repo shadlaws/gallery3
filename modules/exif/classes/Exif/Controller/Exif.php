@@ -25,7 +25,7 @@ class Exif_Controller_Exif extends Controller {
     $item = ORM::factory("Item", $item_id);
     Access::required("view", $item);
 
-    $view = new View("exif/dialog.html");
+    $view = View::factory("exif/dialog.html");
     $view->details = Exif::get($item);
 
     print $view;

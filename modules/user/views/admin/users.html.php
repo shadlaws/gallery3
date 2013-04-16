@@ -130,7 +130,7 @@
         <ul>
           <? foreach ($groups as $i => $group): ?>
           <li id="g-group-<?= $group->id ?>" class="g-group g-left <?= ($group->special ? "g-default-group" : "") ?>">
-            <? $v = new View("admin/users_group.html"); $v->group = $group; ?>
+            <? $v = View::factory("admin/users_group.html"); $v->group = $group; ?>
             <?= $v ?>
           </li>
           <? endforeach ?>

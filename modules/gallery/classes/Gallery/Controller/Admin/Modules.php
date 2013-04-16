@@ -22,9 +22,9 @@ class Gallery_Controller_Admin_Modules extends Controller_Admin {
     // If modules need upgrading, this will get recreated in Module::available()
     SiteStatus::clear("upgrade_now");
 
-    $view = new View_Admin("required/admin.html");
+    $view = View_Admin::factory("required/admin.html");
     $view->page_title = t("Modules");
-    $view->content = new View("admin/modules.html");
+    $view->content = View::factory("admin/modules.html");
     $view->content->available = Module::available();
     $view->content->obsolete_modules_message = Module::get_obsolete_modules_message();
     print $view;
@@ -55,7 +55,7 @@ class Gallery_Controller_Admin_Modules extends Controller_Admin {
       $this->_do_save();
       $result["reload"] = 1;
     } else {
-      $v = new View("admin/modules_confirm.html");
+      $v = View::factory("admin/modules_confirm.html");
       $v->messages = $messages;
       $v->modules = $desired_list;
       $result["dialog"] = (string)$v;

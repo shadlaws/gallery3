@@ -19,7 +19,7 @@
  */
 class Form_Uploadify_buttons_Core extends Form_Input {
   public function render() {
-    $v = new View("form_uploadify_buttons.html");
+    $v = View::factory("form_uploadify_buttons.html");
     return $v;
   }
 }

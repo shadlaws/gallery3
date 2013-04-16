@@ -19,17 +19,34 @@
  */
 class Gallery_View_Theme extends View_Gallery {
   /**
-   * Attempts to load a view and pre-load view data.
+   * Returns a new View_Theme object.  If you do not define the "file" parameter,
+   * you must call View_Theme::set_filename().
    *
-   * @throws  Kohana_Exception  if the requested view cannot be found
-   * @param   string  $name view name
-   * @param   string  $page_type page type: collection, item, or other
-   * @param   string  $page_subtype page sub type: album, photo, tags, etc
-   * @param   string  $theme_name view name
-   * @return  void
+   *   $view = View_Theme::factory($file, $page_type, $page_subtype);
+   *
+   * @param   string  $file          view filename
+   * @param   string  $page_type     page type: collection, item, or other
+   * @param   string  $page_subtype  page subtype: album, photo, tags, etc
+   * @param   array   $data          array of values (local, not global)
+   * @return  View_Theme
    */
-  public function __construct($name, $page_type, $page_subtype) {
-    parent::__construct($name);
+  public static function factory($file=null, $page_type, $page_subtype, array $data=null) {
+    return new View_Theme($file, $page_type, $page_subtype, $data);
+  }
+
+  /**
+   * Attempts to load a View_Theme object and pre-load its data.  View_Theme objects should
+   * almost always be created using View_Theme::factory().
+   *
+   * @param   string  $file          view filename
+   * @param   string  $page_type     page type: collection, item, or other
+   * @param   string  $page_subtype  page subtype: album, photo, tags, etc
+   * @param   array   $data          array of values (local, not global)
+   * @return  void
+   * @throws  View_Exception         if the requested view cannot be found
+   */
+  public function __construct($file=null, $page_type, $page_subtype, array $data=null) {
+    parent::__construct($file, $data);
 
     $this->theme_name = Module::get_var("gallery", "active_site_theme");
     if (Identity::active_user()->admin) {
@@ -51,9 +68,11 @@ class Gallery_View_Theme extends View_Gallery {
 
     if (Module::get_var("gallery", "maintenance_mode", 0)) {
       if (Identity::active_user()->admin) {
-        Message::warning(t("This site is currently in maintenance mode.  Visit the <a href=\"%maintenance_url\">maintenance page</a>", array("maintenance_url" => URL::site("admin/maintenance"))));
-    } else
+        Message::warning(t("This site is currently in maintenance mode.  Visit the <a href=\"%maintenance_url\">maintenance page</a>",
+                           array("maintenance_url" => URL::site("admin/maintenance"))));
+      } else {
         Message::warning(t("This site is currently in maintenance mode."));
+      }
     }
   }
 

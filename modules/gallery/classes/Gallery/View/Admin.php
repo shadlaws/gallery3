@@ -19,15 +19,16 @@
  */
 class Gallery_View_Admin extends View_Gallery {
   /**
-   * Attempts to load a view and pre-load view data.
+   * Attempts to load a View_Admin object and pre-load its data.  View_Admin objects should
+   * almost always be created using View_Admin::factory().
    *
-   * @throws  Kohana_Exception  if the requested view cannot be found
-   * @param   string  $name view name
-   * @param   string  $theme_name view name
+   * @param   string  $file          view filename
+   * @param   array   $data          array of values (local, not global)
    * @return  void
+   * @throws  View_Exception         if the requested view cannot be found
    */
-  public function __construct($name) {
-    parent::__construct($name);
+  public function __construct($file=null, array $data=null) {
+    parent::__construct($file, $data);
 
     $this->theme_name = Module::get_var("gallery", "active_admin_theme");
     if (Identity::active_user()->admin) {

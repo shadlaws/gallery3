@@ -18,7 +18,7 @@
  * Foundation, Inc., 51 Franklin Street - Fifth Floor, Boston, MA  02110-1301, USA.
  */
 Route::set("tag", "tag(/<tag_url>)",
-           array("tag_url" => "[A-Za-z0-9-_/]++")) // Ref: Model_Tag::valid_slug, Route::REGEX_SEGMENT
+           array("tag_url" => "[A-Za-z0-9-_/,]++")) // Ref: Model_Tag::valid_slug, Route::REGEX_SEGMENT
   ->defaults(array(
       "controller" => "tags",
       "action" => "show"

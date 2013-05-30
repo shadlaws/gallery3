@@ -42,15 +42,19 @@ class Tag_Controller_Tags extends Controller {
       $this->redirect($tag->abs_url(), 301);
     }
 
+    // Get the route and look for commas and/or slashes.
     $tag_url = $this->request->param("tag_url");
-    if (empty($tag_url)) {
-      // @todo: this is the future home of the album of all tags.  For now, we 404.
-      throw HTTP_Exception::factory(404);
-    }
-
-    // See if we have a slash in the URL, which might be a Gallery 3.0.x canonical URL with
-    // the form "tag/<id>/<name>" - if so, fire a 301.
-    if (($slash_pos = strpos($tag_url, "/")) !== false) {
+    if (strpos($tag_url, ",") !== false) {
+      // We have one or more commas - check for extraneous commas and redirect to the URL
+      // without them as needed (e.g. "tag/,foo,,bar," --> "tag/foo,bar")
+      $filtered_url = trim($tag_url, ",");
+      $filtered_url = preg_replace("/,+/", ",", $filtered_url);
+      if ($tag_url !== $filtered_url) {
+        $this->redirect("tag/$filtered_url", 301);
+      }
+    } else if (($slash_pos = strpos($tag_url, "/")) !== false) {
+      // We have a slash in the URL, which might be a Gallery 3.0.x canonical URL with
+      // the form "tag/<id>/<name>" - if so, fire a 301; if not, fire a 404.
       $tag_id = substr($tag_url, 0, $slash_pos);
       $tag = ORM::factory("Tag", $tag_id);
       if (!$tag->loaded()) {
@@ -59,9 +63,16 @@ class Tag_Controller_Tags extends Controller {
       $this->redirect($tag->abs_url(), 301);
     }
 
-    // Find the tag by its canonical URL, which has the form "tag(/<slug>)".
+    if (empty($tag_url)) {
+      // @todo: this is the future home of the album of all tags.  For now, we 404.
+      throw HTTP_Exception::factory(404);
+    } else {
+      $slugs = explode(",", $tag_url);
+    }
+
+    // Find the first tag by its canonical URL, which has the form "tag(/<slug>)".
     $tag = ORM::factory("Tag")
-      ->where("slug", "=", $tag_url)
+      ->where("slug", "=", $slugs[0])
       ->find();
     if (!$tag->loaded()) {
       // See if we have a numeric URL, which might be a malformed Gallery 3.0.x URL

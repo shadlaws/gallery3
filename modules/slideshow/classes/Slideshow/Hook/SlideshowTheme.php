@@ -18,7 +18,8 @@
  * Foundation, Inc., 51 Franklin Street - Fifth Floor, Boston, MA  02110-1301, USA.
  */
 class Slideshow_Hook_SlideshowTheme {
-  static function head($theme) {
+  static function page_bottom($theme) {
+    // @TODO: fix dependencies so this can go in head instead of page_bottom.
     $buf = "";
 
     // Include album-specific JS (*not* grouped with other scripts)

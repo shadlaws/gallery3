@@ -18,9 +18,19 @@
  * Foundation, Inc., 51 Franklin Street - Fifth Floor, Boston, MA  02110-1301, USA.
  */
 class Slideshow_Hook_SlideshowTheme {
-  static function page_bottom($theme) {
-    $proto = Request::current()->secure() ? "https" : "http";
-    return "<script src=\"$proto://e.cooliris.com/slideshow/v/37732/go.js\" " .
-      "type=\"text/javascript\"></script>";
+  static function head($theme) {
+    $buf = "";
+
+    // Include album-specific JS (*not* grouped with other scripts)
+    $id = $theme->item->is_album() ? $theme->item()->id : $theme->item()->parent_id;
+    $buf .= HTML::script("slideshow/js/$id", array(), null, true);
+
+    // Include Galleria JS (grouped with other scripts)
+    $ss_theme = Module::get_var("slideshow", "theme", "classic");
+    $buf .= $theme->script("galleria/galleria.min.js");
+    $buf .= $theme->script("galleria/themes/$ss_theme/galleria.$ss_theme.min.js");
+    $buf .= $theme->css("galleria/themes/$ss_theme/galleria.$ss_theme.css");
+
+    return $buf;
   }
 }

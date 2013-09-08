@@ -19,7 +19,8 @@
  */
 class Slideshow_Hook_SlideshowInstaller {
   static function install() {
-    Module::set_var("slideshow", "max_scale", 0);
+    Module::set_var("slideshow", "theme", "classic");
+    Module::set_var("slideshow", "size", Module::get_var("gallery", "resize_size"));
   }
 
   static function upgrade($version) {
@@ -27,17 +28,17 @@ class Slideshow_Hook_SlideshowInstaller {
       Module::set_var("slideshow", "max_scale", 0);
       Module::set_version("slideshow", $version = 2);
     }
-  }
 
-  static function deactivate() {
-    SiteStatus::clear("slideshow_needs_rss");
-  }
+    if ($version == 2) {
+      // In v1-v2, we used the Flash-based Cooliris for the slideshow.
+      // Clear remnants of the old module.
+      Module::clear_var("slideshow", "max_scale");
+      SiteStatus::clear("slideshow_needs_rss");
 
-  static function can_activate() {
-    $messages = array();
-    if (!Module::is_active("rss")) {
-      $messages["warn"][] = t("The Slideshow module requires the RSS module.");
+      // In v3, we now use the JS-based Galleria for the slideshow.
+      Module::set_var("slideshow", "theme", "classic");
+      Module::set_var("slideshow", "size", Module::get_var("gallery", "resize_size"));
+      Module::set_version("slideshow", $version = 3);
     }
-    return $messages;
   }
 }
